@@ -13,14 +13,16 @@
         <h1>Park Finder</h1>
 
         <form id="js-form">
-            <label for="js-search-term">Two-character State Code:</label>
-            <input type="text" name="search-term" id="js-search-term" required><br>
+            <label for="js-search-term">Enter two-character State Code(s):</label>
+            <input type="text" name="search-term" id="js-search-term" required placeholder="CA"><br>
 
-            <label for="js-max-results">Number of Parks in Chosen State:</label>
+            <label for="js-max-results">Number of Parks in Chosen State(s):</label>
             <input type="number" name="max-results" id="js-max-results" value="10">
 
             <input type="submit" value="Search">
         </form>
+
+        <p id="instructions">Make sure when submitting the form to not have a space in front of the state code</p>
 
         <p id="js-error-message" class="error-message"></p>
         <section id="results" class="hidden">

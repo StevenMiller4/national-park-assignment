@@ -1,5 +1,5 @@
 const apiKey = 'RdRckg8Gr5UsXSWHKfKM2iyodXDcGFHCDbTFVDhZ'; 
-const searchURL = 'developer.nps.gov/api/v1/parks';
+const searchURL = 'https://developer.nps.gov/api/v1/parks';
 
 
 function formatQueryParams(params) {
@@ -11,25 +11,27 @@ function formatQueryParams(params) {
 function displayResults(responseJson) {
   console.log(responseJson);
   $('#results-list').empty();
-  for (let i = 0; i < responseJson.items.length; i++){
+  for (let i = 0; i < responseJson.data.length; i++){
     $('#results-list').append(
-      /* `<li><h3>${}</h3>
-      <p>${}</p>
-      <img src='${}'>
-      </li>` */ 
+      `<li><a href="${responseJson.data[i].url}"><h3>${responseJson.data[i].fullName}</h3></a>
+      <p>${responseJson.data[i].description}</p>
+      </li>` 
     )};
   $('#results').removeClass('hidden');
+  $('#instructions').addClass('hidden');
+  $('#js-search-term').val('');
 };
 
 function findPark(query, maxResults=10) {
+  let states = query.split(' ').join(',');
   const params = {
-    key: apiKey,
-    q: query,
-    stateCode: searchState,
-    maxResults
+    stateCode: states,
+    api_key: apiKey,
+    limit: maxResults
   };
-  const queryString = formatQueryParams(params)
+  const queryString = formatQueryParams(params);
   const url = searchURL + '?' + queryString;
+  console.log(url);
 
   fetch(url)
     .then(response => {
