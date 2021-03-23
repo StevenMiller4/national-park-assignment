@@ -13,10 +13,10 @@ function displayResults(responseJson) {
   $('#results-list').empty();
   for (let i = 0; i < responseJson.items.length; i++){
     $('#results-list').append(
-      `<li><h3>${}</h3>
+      /* `<li><h3>${}</h3>
       <p>${}</p>
       <img src='${}'>
-      </li>`
+      </li>` */ 
     )};
   $('#results').removeClass('hidden');
 };
