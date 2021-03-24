@@ -1,3 +1,5 @@
+'use strict';
+
 const apiKey = 'RdRckg8Gr5UsXSWHKfKM2iyodXDcGFHCDbTFVDhZ'; 
 const searchURL = 'https://developer.nps.gov/api/v1/parks';
 
@@ -13,19 +15,17 @@ function displayResults(responseJson) {
   $('#results-list').empty();
   for (let i = 0; i < responseJson.data.length; i++){
     $('#results-list').append(
-      `<li><a href="${responseJson.data[i].url}"><h3>${responseJson.data[i].fullName}</h3></a>
+      `<li><a href="${responseJson.data[i].url}" target="_blank"><h3>${responseJson.data[i].fullName}</h3></a>
       <p>${responseJson.data[i].description}</p>
       </li>` 
     )};
   $('#results').removeClass('hidden');
-  $('#instructions').addClass('hidden');
   $('#js-search-term').val('');
 };
 
 function findPark(query, maxResults=10) {
-  let states = query.split(' ').join(',');
   const params = {
-    stateCode: states,
+    stateCode: query,
     api_key: apiKey,
     limit: maxResults
   };
